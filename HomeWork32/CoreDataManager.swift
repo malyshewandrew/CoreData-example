@@ -45,14 +45,11 @@ final class CoreDataManager {
 
         let managedContext = appDelegate.persistentContainer.viewContext
 
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Car")
+        let fetchRequest = NSFetchRequest<Car>(entityName: "Car")
 
         do {
             let objects = try managedContext.fetch(fetchRequest)
-            guard let fetchedUsers = objects as? [Car] else {
-                return .failure(.error("Could not cast as [Car]"))
-            }
-            return .success(fetchedUsers)
+            return .success(objects)
         } catch {
             return .failure(.error("Could not fetch \(error)"))
         }
